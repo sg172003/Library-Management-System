@@ -21,8 +21,9 @@ public class AuthorService {
         return author;
     }
 
-    public void createAuthor(Author author){
+    public String createAuthor(Author author){
         authorRepository.save(author);
+        return null;
     }
 
     public void updateAuthor(Author author){

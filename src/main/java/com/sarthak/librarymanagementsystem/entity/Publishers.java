@@ -21,6 +21,8 @@ public class Publishers {
     private Long id;
     @Column(name = "name",nullable = false,unique = true,length = 50)
     private String name;
+    @Column(name="book",nullable = false,length = 50,unique = false)
+    private  String book;
 
     public void setId(Long id) {
         this.id = id;
@@ -29,6 +31,5 @@ public class Publishers {
     public Long getId() {
         return id;
     }
-    @ManyToMany(mappedBy = "publishers",cascade = CascadeType.ALL)
-    private Set<Book> books= new HashSet<Book>();
+
 }

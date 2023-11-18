@@ -25,6 +25,8 @@ public class Author {
     private String name;
     @Column(name = "description",nullable = false,length = 100,unique = true)
     private String description;
+    @Column(name="book",nullable = false,length = 50,unique = false)
+    private  String book;
 
     public void setId(Long id) {
         this.id = id;
@@ -33,6 +35,5 @@ public class Author {
     public Long getId() {
         return id;
     }
-@ManyToMany(mappedBy = "authors",cascade = CascadeType.ALL)
-    private Set<Book> books= new HashSet<Book>();
+
 }

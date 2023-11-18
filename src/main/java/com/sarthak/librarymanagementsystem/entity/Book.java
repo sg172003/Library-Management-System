@@ -25,6 +25,13 @@ public class Book {
     private String name;
     @Column(name = "description",nullable = false,length = 100,unique = true)
     private String description;
+    @Column(name = "author",length = 100,unique = false,nullable = false)
+    private String Author;
+    @Column(name = "publisher",length = 100,unique = false,nullable = false)
+    private String Publisher;
+    @Column(name = "category",length = 100,unique = false,nullable = false)
+    private String Category;
+
 
 
     public void setId(Long id) {
@@ -35,50 +42,4 @@ public class Book {
         return id;
     }
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "books_author",
-      joinColumns =    {@JoinColumn(name = "book_id")},
-    inverseJoinColumns= {@JoinColumn(name = "author_id")})
-    private Set<Author> authors=new HashSet<Author>();
-
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "books_category",
-            joinColumns =    {@JoinColumn(name = "book_id")},
-            inverseJoinColumns= {@JoinColumn(name = "category_id")})
-    private Set<Category> categories=new HashSet<Category>();
-
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "books_publishers",
-            joinColumns =    {@JoinColumn(name = "book_id")},
-            inverseJoinColumns= {@JoinColumn(name = "publisher_id")})
-    private Set<Publishers> publishers=new HashSet<Publishers>();
-
-    public  void removePublisher(Publishers publishers){
-        this.publishers.remove(publishers);
-        publishers.getBooks().remove(publishers);
-    }
-
-    public void addPublisher(Publishers publishers){
-        this.publishers.add(publishers);
-        publishers.getBooks().add(this);
-    }
-
-    public  void removeAuthor(Author author){
-        this.authors.remove(author);
-        author.getBooks().remove(author);
-    }
-
-    public void addAuthor(Author author){
-        this.authors.add(author);
-        author.getBooks().add(this);
-    }
-    public  void removeCategory(Category category){
-        this.categories.remove(category);
-        category.getBooks().remove(category);
-    }
-
-    public void addCategory(Category category){
-        this.categories.add(category);
-        category.getBooks().add(this);
-    }
 }
